@@ -12,6 +12,9 @@ class DBManager:
         self.db = sqlite3.connect(path)
         self.conn = self.db.cursor()
 
+    def __del__(self):
+        self.db.close()
+
     def insert_book(self, value_tuple):
         '''Insert book into database.'''
         query = '''

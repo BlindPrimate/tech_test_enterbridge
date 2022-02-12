@@ -1,4 +1,6 @@
+from __future__ import annotations
 import re
+
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from scraper.scraper import Scraper
@@ -28,7 +30,8 @@ basic_targets = {
 
 product_dimensions = '//*[@id="ProductDetailsTab"]/table/tbody[1]/tr[8]/td'
 
-def parse_dimensions(string):
+
+def parse_dimensions(string: str) -> list[str]:
     """Parse dimensions string into an array of Length, width, and height values."""
     parsed = re.findall(r"(\d*.\d\d)", string)
     return parsed
@@ -39,16 +42,18 @@ def main():
     results = {}
     scraper = Scraper(driver, target_product_url)
 
+    # scrape basic details
     for target, xpath in basic_targets.items():
         results[target] = scraper.get_by_xpath(xpath).get_attribute("textContent")
 
+    # scrape dimensions
     dimensions = scraper.get_by_xpath(product_dimensions).get_attribute("textContent")
-
     parsed = parse_dimensions(dimensions)
     results['product_width'] = parsed[0]
     results['product_height'] = parsed[1]
     results['product_depth'] = parsed[2]
 
+    # save to database
     value_tuple = tuple(results.values())
     db.insert_book(value_tuple)
     print(f"Database entry saved: {results}")
