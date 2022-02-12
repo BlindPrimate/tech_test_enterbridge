@@ -15,10 +15,10 @@ c.execute(
         edition_description text,
         pages text,
         sales_rank text,
+        price real,
         product_width real,
         product_height real,
-        product_depth real,
-        price real
+        product_depth real
         )
     '''
 )

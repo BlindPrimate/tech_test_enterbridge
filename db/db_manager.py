@@ -17,7 +17,7 @@ class DBManager:
         query = '''
         INSERT INTO books (title, isbn_13, publisher, publication_date, 
                         series, edition_description, pages, sales_rank, 
-                        product_width, product_height, product_depth, price) 
+                        price, product_width, product_height, product_depth) 
         VALUES (?,?,?,?,?,?,?,?,?,?,?,?)
         '''
 
