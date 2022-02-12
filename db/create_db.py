@@ -1,18 +1,18 @@
 import sqlite3
 
-conn = sqlite3.connect('../test_database')
+conn = sqlite3.connect('./sqllitedb')
 c = conn.cursor()
 
 c.execute(
     '''
         CREATE TABLE IF NOT EXISTS books
         (id INTEGER PRIMARY KEY, 
-        name varchar(255), 
+        title text, 
         isbn_13 integer,
         publisher text,
         publication_date text,
         series text,
-        description text,
+        edition_description text,
         pages text,
         sales_rank text,
         product_width real,

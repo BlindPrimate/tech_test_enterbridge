@@ -10,7 +10,8 @@ class Scraper:
         self._wait = WebDriverWait(self._driver, 20)
 
     def __del__(self):
-        self._driver.close()
+        self._driver.quit()
 
     def get_by_xpath(self, xpath):
-        return self._wait.until(ec.presence_of_all_elements_located((By.XPATH, xpath)))
+        return self._wait.until(ec.presence_of_element_located((By.XPATH, xpath)))
+
